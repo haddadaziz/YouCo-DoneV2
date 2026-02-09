@@ -17,9 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        // Générer 15 restaurants fictifs liés à ce user
+        \App\Models\Restaurant::factory(15)->create([
+            'user_id' => $user->id,
         ]);
     }
 }
