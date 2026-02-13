@@ -32,7 +32,6 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // Ta sécurité manuelle (on la garde)
         if (!auth()->check() || auth()->user()->role !== 'restaurateur') {
             abort(403, 'Seuls les restaurateurs peuvent ajouter un restaurant.');
         }
@@ -65,8 +64,6 @@ class RestaurantController extends Controller
             $imagePath = $request->file('image')->store('restaurants', 'public');
         }
 
-        // 4. Création en base de données
-        // On utilise la relation pour lier automatiquement l'ID du user connecté
         $request->user()->restaurants()->create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -77,7 +74,6 @@ class RestaurantController extends Controller
             'image' => $imagePath,
         ]);
 
-        // 5. Redirection vers le dashboard
         return redirect()->route('dashboard.restaurateur')->with('success', 'Restaurant ajouté avec succès !');
     }
 

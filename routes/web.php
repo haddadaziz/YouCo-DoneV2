@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\ReservationController;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,3 +47,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::resource('restaurants', RestaurantController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('restaurants/{restaurant}/availabilities', [AvailabilityController::class, 'index'])->name('restaurants.availabilities.index');
+    Route::post('restaurants/{restaurant}/availabilities', [AvailabilityController::class, 'store'])->name('restaurants.availabilities.store');
+    Route::delete('availabilities/{availability}', [AvailabilityController::class, 'destroy'])->name('availabilities.destroy');
+
+    Route::post('restaurants/{restaurant}/reserve', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('reservations/{reservation}/pay', [ReservationController::class, 'pay'])->name('reservations.pay');
+    Route::get('reservations/success', [ReservationController::class, 'success'])->name('reservations.success');
+
+    Route::get('/admin/dashboard', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+});

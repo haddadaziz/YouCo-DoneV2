@@ -38,29 +38,28 @@
                     <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 sticky top-24 shadow-2xl">
                         <h3 class="text-2xl font-bold mb-6">Réserver une table</h3>
                         
-                        <form action="#" method="POST" class="space-y-5">
+                        <form action="{{ route('reservations.store', $restaurant) }}" method="POST" class="space-y-5">
                             @csrf
                             <div>
                                 <label class="block text-sm font-bold text-gray-400 mb-2">Date</label>
-                                <input type="date" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                <input type="date" name="date" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-gray-400 mb-2">Heure</label>
-                                <input type="time" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                <input type="time" name="time" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-gray-400 mb-2">Personnes</label>
-                                <select class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
-                                    <option>2 personnes</option>
-                                    <option>4 personnes</option>
-                                    <option>6 personnes</option>
-                                    <option>8 personnes</option>
-                                </select>
+                                <input type="number" name="number_of_guests" min="1" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" required>
                             </div>
-                            <button type="button" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 mt-4">
-                                Confirmer la réservation
+                            <div>
+                                <label class="block text-sm font-bold text-gray-400 mb-2">Notes (Allergies, etc.)</label>
+                                <textarea name="notes" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 mt-4">
+                                Réserver (Acompte 10€)
                             </button>
-                            <p class="text-xs text-center text-gray-500 mt-2">Aucun paiement requis pour réserver.</p>
+                            <p class="text-xs text-center text-gray-500 mt-2">Paiement sécurisé via Stripe.</p>
                         </form>
                     </div>
                 </div>

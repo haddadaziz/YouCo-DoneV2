@@ -50,6 +50,9 @@
                                 </div>
 
                                 <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                                    <a href="{{ route('restaurants.availabilities.index', $restaurant) }}" class="px-4 py-2 text-sm font-bold text-gray-300 bg-gray-800 hover:bg-gray-700 hover:text-white rounded-lg border border-gray-700 transition-all">
+                                        Disponibilités
+                                    </a>
                                     <a href="{{ route('restaurants.edit', $restaurant) }}" class="px-4 py-2 text-sm font-bold text-gray-300 bg-gray-800 hover:bg-gray-700 hover:text-white rounded-lg border border-gray-700 transition-all">
                                         Modifier
                                     </a>
